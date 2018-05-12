@@ -290,3 +290,37 @@ a, a:visited, a:hover, a:active {
 .pure-g .calcImg img {
   width: 300px;
 }
+
+@media (max-width: 568px) {
+  .calcImg1 img {
+    width: 300px;
+  }
+
+  .calcImg2 img {
+    width: 100px;
+  }
+
+  .calcImg3 img, .calcImg4 img {
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+  .calcImg1 img {
+    width: 500px;
+  }
+
+  .calcImg2 img {
+    width: 100px;
+  }
+
+  .calcImg3 img, .calcImg4 img {
+    width: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+}

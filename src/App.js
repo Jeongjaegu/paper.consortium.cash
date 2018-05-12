@@ -109,19 +109,19 @@ class App extends Component {
                 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
               </p>
 
-              <p className='calcImg'><img alt='calculations' src="./calculations2.png" /></p>
+              <p className='calcImg2'><img alt='calculations' src="./calculations2.png" /></p>
 
               <p>
                 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
               </p>
 
-              <p className='calcImg'><img alt='calculations' src="./calculations3.png" /></p>
+              <p className='calcImg3'><img alt='calculations' src="./calculations3.png" /></p>
 
               <p>
                 Rearranging to avoid summing the infinite tail of the distribution...
               </p>
 
-              <p className='calcImg'><img alt='calculations' src="./calculations4.png" /></p>
+              <p className='calcImg4'><img alt='calculations' src="./calculations4.png" /></p>
 
               <p>
                 Converting to C code...
