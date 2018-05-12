@@ -276,7 +276,6 @@ a, a:visited, a:hover, a:active {
   text-align: center;
 }
 
-.pure-g img {
-  width: 150px;
-  border-radius: 5px;
+.pure-g .img {
+  text-align: center;
 }
