@@ -4,7 +4,7 @@
 
 #### October 31, 2008
 
-https://whitepaper.consortium.cash/
+https://paper.consortium.cash/
 
 ### Credits
 
