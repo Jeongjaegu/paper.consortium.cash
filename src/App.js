@@ -73,7 +73,7 @@ class App extends Component {
               <p>The incentive may help encourage nodes to stay honest. If a greedy attacker is able to assemble more CPU power than all the honest nodes, he would have to choose between using it to defraud people by stealing back his payments, or using it to generate new coins. He ought to find it more profitable to play by the rules, such rules that favour him with more new coins than everyone else combined, than to undermine the system and the validity of his own wealth.</p>
 
               <h2>7. Reclaiming Disk Space</h2>
-              <p>Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree [7][2][5], with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.</p>
+              <p>Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space. To facilitate this without breaking the block's hash, transactions are hashed in a Merkle Tree <sup><a href="#fn7" id="ref7">[7]</a></sup><sup><a href="#fn2" id="ref2-2">[2]</a></sup><sup><a href="#fn5" id="ref5">[5]</a></sup>, with only the root included in the block's hash. Old blocks can then be compacted by stubbing off branches of the tree. The interior hashes do not need to be stored.</p>
               <p className='img'><img alt="reclaiming-disk-space" src="./reclaiming-disk-space.svg" /></p>
               <p>A block header with no transactions would be about 80 bytes. If we suppose blocks are generated every 10 minutes, 80 bytes * 6 * 24 * 365 = 4.2MB per year. With computer systems typically selling with 2GB of RAM as of 2008, and Moore's Law predicting current growth of 1.2GB per year, storage should not be a problem even if the block headers must be kept in memory.</p>
 
@@ -207,7 +207,7 @@ class App extends Component {
               <ol>
 			          <li id="fn1">
                   <p>
-                    W. Dai, <a href="http://nakamotoinstitute.org/b-money/">"b-money,"</a> <a href="http://www.weidai.com/bmoney.txt">http://www.weidai.com/bmoney.txt</a>, 1998.&nbsp;<a href="#ref1" title="Jump back to [1]">↩</a>
+                    W. Dai, "b-money," <a href="http://www.weidai.com/bmoney.txt">http://www.weidai.com/bmoney.txt</a>, 1998.&nbsp;<a href="#ref1" title="Jump back to [1]">↩</a>
                   </p>
                 </li>
 
@@ -231,13 +231,13 @@ class App extends Component {
 
 			          <li id="fn5">
                   <p>
-                    S. Haber, W.S. Stornetta, <a href="http://nakamotoinstitute.org/secure-names-bit-strings.pdf">"Secure names for bit-strings,"</a> In <em>Proceedings of the 4th ACM Conference on Computer and Communications Security</em>, pages 28-35, April 1997.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>&nbsp;<a href="#ref5" title="Jump back to [5]">↩</a>
+                    S. Haber, W.S. Stornetta, <a href="http://nakamotoinstitute.org/secure-names-bit-strings.pdf">"Secure names for bit-strings,"</a> In <em>Proceedings of the 4th ACM Conference on Computer and Communications Security</em>, pages 28-35, April 1997.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>
                   </p>
                 </li>
 
 			          <li id="fn6">
                   <p>
-                    A. Back, <a href="http://nakamotoinstitute.org/hashcash.pdf">"Hashcash - a denial of service counter-measure,"</a> <a href="http://www.hashcash.org/papers/hashcash.pdf">http://www.hashcash.org/papers/hashcash.pdf</a>, 2002.&nbsp;<a href="#ref6" title="Jump back to [6]">↩</a>
+                    A. Back, "Hashcash - a denial of service counter-measure," <a href="http://www.hashcash.org/papers/hashcash.pdf">http://www.hashcash.org/papers/hashcash.pdf</a>, 2002.&nbsp;<a href="#ref6" title="Jump back to [6]">↩</a>
                   </p>
                 </li>
 
