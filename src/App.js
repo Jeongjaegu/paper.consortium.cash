@@ -41,14 +41,14 @@ class App extends Component {
               <p>We define an electronic coin as a chain of digital signatures. Each owner transfers the coin to the next by digitally signing a hash of the previous transaction and the public key of the next owner and adding these to the end of the coin. A payee can verify the signatures to verify the chain of ownership.</p>
               <p className='img'><img alt='transactions' src="./transactions.svg" /></p>
               <p>The problem of course is the payee can&rsquo;t verify that one of the owners did not double-spend the coin. A common solution is to introduce a trusted central authority, or mint, that checks every transaction for double spending. After each transaction, the coin must be returned to the mint to issue a new coin, and only coins issued directly from the mint are trusted not to be double-spent. The problem with this solution is that the fate of the entire money system depends on the company running the mint, with every transaction having to go through them, just like a bank. </p>
-              <p>We need a way for the payee to know that the previous owners did not sign any earlier transactions. For our purposes, the earliest transaction is the one that counts, so we don&rsquo;t care about later attempts to double-spend. The only way to confirm the absence of a transaction is to be aware of all transactions. In the mint based model, the mint was aware of all transactions and decided which arrived first. To accomplish this without a trusted party, transactions must be publicly announced[1], and we need a system for participants to agree on a single history of the order in which they were received. The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.</p>
+              <p>We need a way for the payee to know that the previous owners did not sign any earlier transactions. For our purposes, the earliest transaction is the one that counts, so we don&rsquo;t care about later attempts to double-spend. The only way to confirm the absence of a transaction is to be aware of all transactions. In the mint based model, the mint was aware of all transactions and decided which arrived first. To accomplish this without a trusted party, transactions must be publicly announced<sup><a href="#fn1" id="ref1">[1]</a></sup>, and we need a system for participants to agree on a single history of the order in which they were received. The payee needs proof that at the time of each transaction, the majority of nodes agreed it was the first received.</p>
 
               <h2>3. Timestamp Server</h2>
-              <p>The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash, such as in a newspaper or Usenet post[2-5]. The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.</p>
+              <p>The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash, such as in a newspaper or Usenet post<sup><a href="#fn2" id="ref2">[2-5]</a></sup>. The timestamp proves that the data must have existed at the time, obviously, in order to get into the hash. Each timestamp includes the previous timestamp in its hash, forming a chain, with each additional timestamp reinforcing the ones before it.</p>
               <p className='img'><img alt='timestamp-server' src="./timestamp-server.svg" /></p>
 
               <h2>4. Proof-of-Work</h2>
-              <p>To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system similar to Adam Back&rsquo;s Hashcash[6], rather than newspaper or Usenet posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits. The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.</p>
+              <p>To implement a distributed timestamp server on a peer-to-peer basis, we will need to use a proof-of-work system similar to Adam Back&rsquo;s Hashcash<sup><a href="#fn6" id="ref6">[6]</a></sup>, rather than newspaper or Usenet posts. The proof-of-work involves scanning for a value that when hashed, such as with SHA-256, the hash begins with a number of zero bits. The average work required is exponential in the number of zero bits required and can be verified by executing a single hash.</p>
               <p>For our timestamp network, we implement the proof-of-work by incrementing a nonce in the block until a value is found that gives the block&rsquo;s hash the required zero bits. Once the CPU effort has been expended to make it satisfy the proof-of-work, the block cannot be changed without redoing the work. As later blocks are chained after it, the work to change the block would include redoing all the blocks after it.</p>
               <p className='img'><img alt="proof-of-work" src="./proof-of-work.svg" /></p>
               <p>The proof-of-work also solves the problem of determining representation in majority decision making. If the majority were based on one-IP-address-one-vote, it could be subverted by anyone able to allocate many IPs. Proof-of-work is essentially one-CPU-one-vote. The majority decision is represented by the longest chain, which has the greatest proof-of-work effort invested in it. If a majority of CPU power is controlled by honest nodes, the honest chain will grow the fastest and outpace any competing chains. To modify a past block, an attacker would have to redo the proof-of-work of the block and all blocks after it and then catch up with and surpass the work of the honest nodes. We will show later that the probability of a slower attacker catching up diminishes exponentially as subsequent blocks are added.</p>
@@ -204,7 +204,55 @@ class App extends Component {
               <p>We have proposed a system for electronic transactions without relying on trust. We started with the usual framework of coins made from digital signatures, which provides strong control of ownership, but is incomplete without a way to prevent double-spending. To solve this, we proposed a peer-to-peer network using proof-of-work to record a public history of transactions that quickly becomes computationally impractical for an attacker to change if honest nodes control a majority of CPU power. The network is robust in its unstructured simplicity. Nodes work all at once with little coordination. They do not need to be identified, since messages are not routed to any particular place and only need to be delivered on a best effort basis. Nodes can leave and rejoin the network at will, accepting the proof-of-work chain as proof of what happened while they were gone. They vote with their CPU power, expressing their acceptance of valid blocks by working on extending them and rejecting invalid blocks by refusing to work on them. Any needed rules and incentives can be enforced with this consensus mechanism.</p>
 
               <h2>References</h2>
-              <p></p>
+              <ol>
+			          <li id="fn1">
+                  <p>
+                    W. Dai, <a href="http://nakamotoinstitute.org/b-money/">"b-money,"</a> <a href="http://www.weidai.com/bmoney.txt">http://www.weidai.com/bmoney.txt</a>, 1998.&nbsp;<a href="#ref1" title="Jump back to [1]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn2">
+                  <p>
+                    H. Massias, X.S. Avila, and J.-J. Quisquater, <a href="http://nakamotoinstitute.org/secure-timestamping-service.pdf">"Design of a secure timestamping service with minimal trust requirements,"</a> In <em>20th Symposium on Information Theory in the Benelux</em>, May 1999.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn3">
+                  <p>
+                    S. Haber, W.S. Stornetta, <a href="http://nakamotoinstitute.org/time-stamp-digital-document.pdf">"How to time-stamp a digital document,"</a> In <em>Journal of Cryptology</em>, vol 3, no 2, pages 99-111, 1991.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn4">
+                  <p>
+                    D. Bayer, S. Haber, W.S. Stornetta, <a href="http://nakamotoinstitute.org/improving-time-stamping.pdf">"Improving the efficiency and reliability of digital time-stamping,"</a> In <em>Sequences II: Methods in Communication, Security and Computer Science</em>, pages 329-334, 1993.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn5">
+                  <p>
+                    S. Haber, W.S. Stornetta, <a href="http://nakamotoinstitute.org/secure-names-bit-strings.pdf">"Secure names for bit-strings,"</a> In <em>Proceedings of the 4th ACM Conference on Computer and Communications Security</em>, pages 28-35, April 1997.&nbsp;<a href="#ref2" title="Jump back to [2-5]">↩</a>&nbsp;<a href="#ref5" title="Jump back to [5]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn6">
+                  <p>
+                    A. Back, <a href="http://nakamotoinstitute.org/hashcash.pdf">"Hashcash - a denial of service counter-measure,"</a> <a href="http://www.hashcash.org/papers/hashcash.pdf">http://www.hashcash.org/papers/hashcash.pdf</a>, 2002.&nbsp;<a href="#ref6" title="Jump back to [6]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn7">
+                  <p>
+                    R.C. Merkle, <a href="http://nakamotoinstitute.org/public-key-cryptosystems.pdf">"Protocols for public key cryptosystems,"</a> In <em>Proc. 1980 Symposium on Security and Privacy</em>, IEEE Computer Society, pages 122-133, April 1980.&nbsp;<a href="#ref7" title="Jump back to [7]">↩</a>
+                  </p>
+                </li>
+
+			          <li id="fn8">
+                  <p>
+                    W. Feller, <a href="http://nakamotoinstitute.org/introduction-probability-theory-vol-i.pdf">"An introduction to probability theory and its applications,"</a> 1957.&nbsp;<a href="#ref8" title="Jump back to [8]">↩</a>
+                  </p>
+                </li>
+              </ol>
             </div>
           </div>
         </div>
