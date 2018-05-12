@@ -279,3 +279,16 @@ a, a:visited, a:hover, a:active {
 .pure-g .img {
   text-align: center;
 }
+
+.pure-g .img img {
+  width: 100%;
+}
+
+.pure-g .calcImg1 img {
+  width: 600px;
+  max-width: 300px;
+}
+
+.pure-g .calcImg img {
+  width: 300px;
+}

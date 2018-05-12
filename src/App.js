@@ -5,20 +5,7 @@ import { docco } from 'react-syntax-highlighter/styles/hljs';
 import './App.css';
 
 class App extends Component {
-  handleClick() {
-    if(this.state.activeMenu === 'active') {
-      this.setState({
-        activeMenu: ''
-      });
-    } else {
-      this.setState({
-        activeMenu: 'active'
-      });
-    }
-  }
-
   render() {
-
     return (
       <div id="">
         <div id="main">
@@ -27,7 +14,6 @@ class App extends Component {
             <h2>Satoshi Nakamoto</h2>
             <p>October 31, 2008</p>
           </div>
-
           <div className="pure-g content">
             <div className="pure-u-1">
               <h2>Abstract</h2>
@@ -105,13 +91,14 @@ class App extends Component {
                 The probability of an attacker catching up from a given deficit is analogous to a Gambler's Ruin problem. Suppose a gambler with unlimited credit starts at a deficit and plays potentially an infinite number of trials to try to reach breakeven. We can calculate the probability he ever reaches breakeven, or that an attacker ever catches up with the honest chain, as follows<sup><a href="#fn8" id="ref8">[8]</a></sup>:
               </p>
 
+              <p className='calcImg1'><img alt='calculations' src="./calculations1.png" /></p>
 
               <p>
-                Given our assumption that $p \gt q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. With the odds against him, if he doesn't make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.
+                Given our assumption that $p \gt q$, the probability drops exponentially as the number of blocks the attacker has to catch up with increases. With the odds against him, if he doesn&rsquo;t make a lucky lunge forward early on, his chances become vanishingly small as he falls further behind.
               </p>
 
               <p>
-                We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can't change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
+                We now consider how long the recipient of a new transaction needs to wait before being sufficiently certain the sender can&rsquo;t change the transaction. We assume the sender is an attacker who wants to make the recipient believe he paid him for a while, then switch it to pay back to himself after some time has passed. The receiver will be alerted when that happens, but the sender hopes it will be too late.
               </p>
 
               <p>
@@ -122,13 +109,20 @@ class App extends Component {
                 The recipient waits until the transaction has been added to a block and $z$ blocks have been linked after it. He doesn't know the exact amount of progress the attacker has made, but assuming the honest blocks took the average expected time per block, the attacker's potential progress will be a Poisson distribution with expected value:
               </p>
 
+              <p className='calcImg'><img alt='calculations' src="./calculations2.png" /></p>
+
               <p>
                 To get the probability the attacker could still catch up now, we multiply the Poisson density for each amount of progress he could have made by the probability he could catch up from that point:
               </p>
 
+              <p className='calcImg'><img alt='calculations' src="./calculations3.png" /></p>
+
               <p>
                 Rearranging to avoid summing the infinite tail of the distribution...
               </p>
+
+              <p className='calcImg'><img alt='calculations' src="./calculations4.png" /></p>
+
               <p>
                 Converting to C code...
               </p>
